@@ -1,0 +1,18 @@
+body {
+    background-size:;
+    background-image:url('background2.gif');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    background-color: rgb(38, 38, 39);
+}
+
+
+input {
+    font-family: 'ArcadeClassic', sans-serif;
+}
+
+.buttonstuff {
+    text-align: center;
+}
