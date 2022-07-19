@@ -5,7 +5,7 @@ let button = document.querySelector("button")
 
 button.onclick = function(){
     let intro = introField.value
-    let message = "I can't believe you said " + intro
+    let message = "the solution to all your probems is " + intro
     console.log(message)
     document.write(message)
 }
