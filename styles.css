@@ -1,16 +1,53 @@
-
-body {
-    
-    background-color: rgb(255, 255, 255);
+input {font-family: 'ArcadeClassic', sans-serif;
+}
+button {font-family: 'ArcadeClassic', sans-serif;
+}
+.usernameOutput {font-family: 'ArcadeClassic', sans-serif;
 }
 
+ .gameButtons {background-color: rgb(255, 255, 255);
+    padding-top: 8em;
+    display: flex;
+    justify-content: center;
+ }
+ .usernameOutput {background-color: rgb(255, 255, 255);
+    padding-top: 2em;
+    display: flex;
+    justify-content: center;
+ }
 
-input {
+/*typwriter experimental*/
+
+    .typed-out {  
+   padding-top: 0em;
+    display: flex;  
+    position: relative; margin-top: 50px;
+    justify-content: center;
+
+    overflow: hidden;
+    border-right: .15em solid rgb(255, 255, 255);
+    white-space: nowrap;
+    animation: 
+    typing 1s steps(20, end) forwards;
+    font-size: 3rem;
     font-family: 'ArcadeClassic', sans-serif;
-}
+    width: 0;
+    }
+    @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+    }
 
+/*single player screen info*/
 
+    canvas {
+        text-align: center;
+    }
 
-button {
-    font-family: 'ArcadeClassic', sans-serif;
-}
+    .uselessButton {
+        padding-top: 0em;
+        display: flex;  
+        position: relative; margin-top: 300px;
+        position: relative; margin-left: 300px;
+        color: red;
+    }

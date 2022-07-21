@@ -3,22 +3,35 @@ console.log("Hello world")
 //declaring variables
 
     let usernameInput = document.querySelector(".usernameInput")
-    let usernameButton = document.querySelector(".usernameButton")
+    const usernameButton = document.querySelector(".usernameButton")
     let usernameOutput = document.querySelector(".usernameOutput")
     
 
 //set username function     
 
         usernameButton.onclick = function (){
-            usernameOutput.textContent = "welcome:" + usernameInput.value
+            let message =  usernameInput.value
+            if(message.length > 0){
+
+                usernameOutput.textContent = "welcome:" + message
+            }
         }
 
 //change username
-       usernameInput.onchange = function(){myScript};
+       usernameInput.onkeydown = function(){
+        usernameOutput.textContent = "" 
+       };
 
        
 
-    // let singlePlayerButton = document.querySelector(".singlePlayerButton")
-    // let multiPlayerButton = document.querySelector(".multiPlayerButton")
+    const singlePlayerButton = document.querySelector(".singlePlayerButton")
+    const multiPlayerButton = document.querySelector(".multiPlayerButton")
 
-    //     onclick
+//screen changer
+
+        singlePlayerButton.onclick = function (){
+            const screen1 = document.querySelector(".screen1")
+                screen1.style["display"] = "none"        
+            const screen2 = document.querySelector(".screen2")
+                screen2.style["display"] = "block"
+        }
