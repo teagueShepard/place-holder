@@ -12,7 +12,7 @@ console.log("Hello world")
         usernameButton.onclick = function (){
             let message =  usernameInput.value
             if(message.length > 0){
-
+                
                 usernameOutput.textContent = "welcome:" + message
             }
         }
@@ -24,14 +24,35 @@ console.log("Hello world")
 
        
 
-    const singlePlayerButton = document.querySelector(".singlePlayerButton")
-    const multiPlayerButton = document.querySelector(".multiPlayerButton")
+    
 
 //screen changer
+ 
+    //screens
+const titleScreen = document.querySelector(".titleScreen")
+const singlePlayerScreen = document.querySelector(".singlePlayerScreen")
+const multiPlayerScreen = document.querySelector(".multiPlayerScreen")
 
-        singlePlayerButton.onclick = function (){
-            const screen1 = document.querySelector(".screen1")
-                screen1.style["display"] = "none"        
-            const screen2 = document.querySelector(".screen2")
-                screen2.style["display"] = "block"
+    //screen changing buttons
+const singlePlayerButton = document.querySelector(".singlePlayerButton")
+const multiPlayerButton = document.querySelector(".multiPlayerButton")
+
+    //screen changing logic
+
+const allScreens = [titleScreen, singlePlayerScreen, multiPlayerScreen]
+
+const showScreen = (screenToShow)=>{
+    allScreens.forEach(screen=>{
+        if(screen === screenToShow){
+            screen.style["display"] = "block"
+        }else{
+            screen.style["display"] = "none"
         }
+    })
+}
+
+
+singlePlayerButton.onclick = ()=>showScreen(singlePlayerScreen)
+multiPlayerButton.onclick = ()=>showScreen(multiPlayerScreen)
+
+        

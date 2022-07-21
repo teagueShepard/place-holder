@@ -43,11 +43,3 @@ button {font-family: 'ArcadeClassic', sans-serif;
     canvas {
         text-align: center;
     }
-
-    .uselessButton {
-        padding-top: 0em;
-        display: flex;  
-        position: relative; margin-top: 300px;
-        position: relative; margin-left: 300px;
-        color: red;
-    }
