@@ -28,7 +28,6 @@ console.log("Hello world")
                 screenUsername.textContent = "P1:" + currentUsername
 
             } else {
-
                 singlePlayerButton.style["display"] = "none"
                 multiPlayerButton.style["display"] = "none"
             }
@@ -42,10 +41,10 @@ console.log("Hello world")
        usernameInput.onkeydown = function(){
         usernameOutput.textContent = "" 
         singlePlayerButton.style["display"] = "none"
-            multiPlayerButton.style["display"] = "none"
+        multiPlayerButton.style["display"] = "none"
        };
 
-   
+  
 
     
 
@@ -59,6 +58,8 @@ const multiPlayerScreen = document.querySelector(".multiPlayerScreen")
     //screen changing buttons
 const singlePlayerButton = document.querySelector(".singlePlayerButton")
 const multiPlayerButton = document.querySelector(".multiPlayerButton")
+const titleScreenButton = document.querySelector(".titleScreenButton")
+
 
     //screen changing logic
 
@@ -77,12 +78,23 @@ const showScreen = (screenToShow)=>{
 
 singlePlayerButton.onclick = ()=>showScreen(singlePlayerScreen)
 multiPlayerButton.onclick = ()=>showScreen(multiPlayerScreen)
+titleScreenButton.onclick = ()=>showScreen(titleScreen)
 
-// if (screen === singlePlayerScreen){
-//     loadBong()
-//     screen.style["display"] = "block"
-// }
+if (screen === singlePlayerScreen) {
+    console.log("single player screen")
+    screen.style["display"] = "block"
+    titleScreenButton.style["display"] = "block"
+//  loadBong()
+}else if(screen === multiPlayerScreen) {
+    console.log("multi player screen")
+    titleScreenButton.style["display"] = "block"
+    
+}else{
+    titleScreenButton.style["display"] = "none"
+}
 
+//Game Code
 // function loadBong(){
+// let paddleOfPlayer = document.querySelector('.paddleOne')
 
 // }
