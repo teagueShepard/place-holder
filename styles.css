@@ -2,6 +2,13 @@ input {font-family: 'ArcadeClassic', sans-serif;
 }
 button {font-family: 'ArcadeClassic', sans-serif;
 }
+p {font-family: 'ArcadeClassic', sans-serif;
+}
+p.screenUsername {
+    background-color: #171819;
+    width:fit-content;
+    height:fit-content;
+}
 .usernameOutput {font-family: 'ArcadeClassic', sans-serif;
 }
 
@@ -9,6 +16,7 @@ button {font-family: 'ArcadeClassic', sans-serif;
     padding-top: 8em;
     display: flex;
     justify-content: center;
+    
  }
  .usernameOutput {background-color: rgb(255, 255, 255);
     padding-top: 2em;
@@ -40,6 +48,22 @@ button {font-family: 'ArcadeClassic', sans-serif;
 
 /*single player screen info*/
 
-    canvas {
-        text-align: center;
+    .singlePlayerButton {
+        display: none;
+    }
+    .multiPlayerButton {
+        display: none;
+    }
+   
+
+
+    /*this is a temp rick roll*/
+
+    a.trollButton {
+        -webkit-appearance: button;
+        -moz-appearance: button;
+        appearance: button;
+    
+        text-decoration: none;
+        color: rgb(255, 255, 255);
     }

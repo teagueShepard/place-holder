@@ -1,28 +1,51 @@
 console.log("Hello world")
 
-//declaring variables
+//username-related variables
 
     let usernameInput = document.querySelector(".usernameInput")
     const usernameButton = document.querySelector(".usernameButton")
     let usernameOutput = document.querySelector(".usernameOutput")
+    let screenUsername = document.querySelector(".screenUsername")
+   
     
 
 //set username function     
 
+        
+
         usernameButton.onclick = function (){
-            let message =  usernameInput.value
-            if(message.length > 0){
-                
-                usernameOutput.textContent = "welcome:" + message
+            let currentUsername =  usernameInput.value
+            if (currentUsername.length > 0) {
+
+
+                usernameOutput.textContent = "welcome:" + currentUsername
+
+                setTimeout(() => {
+                singlePlayerButton.style["display"] = "block"
+                multiPlayerButton.style["display"] = "block"
+                }, 1000);
+
+                screenUsername.textContent = "P1:" + currentUsername
+
+            } else {
+
+                singlePlayerButton.style["display"] = "none"
+                multiPlayerButton.style["display"] = "none"
             }
         }
+
+            //setTimeout syntax  ---->  setTimeout(function() {
+            //   stuff to do after time of 200ms has elapsed
+            // }, 200)
 
 //change username
        usernameInput.onkeydown = function(){
         usernameOutput.textContent = "" 
+        singlePlayerButton.style["display"] = "none"
+            multiPlayerButton.style["display"] = "none"
        };
 
-       
+   
 
     
 
@@ -55,4 +78,3 @@ const showScreen = (screenToShow)=>{
 singlePlayerButton.onclick = ()=>showScreen(singlePlayerScreen)
 multiPlayerButton.onclick = ()=>showScreen(multiPlayerScreen)
 
-        
