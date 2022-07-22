@@ -78,3 +78,11 @@ const showScreen = (screenToShow)=>{
 singlePlayerButton.onclick = ()=>showScreen(singlePlayerScreen)
 multiPlayerButton.onclick = ()=>showScreen(multiPlayerScreen)
 
+// if (screen === singlePlayerScreen){
+//     loadBong()
+//     screen.style["display"] = "block"
+// }
+
+// function loadBong(){
+
+// }

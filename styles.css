@@ -55,15 +55,24 @@ p.screenUsername {
         display: none;
     }
    
+    /* Darkmode styling */
 
-
-    /*this is a temp rick roll*/
-
-    a.trollButton {
-        -webkit-appearance: button;
-        -moz-appearance: button;
-        appearance: button;
+    html, body {
+        border-color: #696257;
+        color: #cdcbc8;
+    }
+    .gameButtons {
+        background-color: #1b1d1d;
+    }
     
-        text-decoration: none;
-        color: rgb(255, 255, 255);
+    .usernameOutput {
+        background-color: #1b1d1d;
+        color: #1b1d1d;
+    } 
+    html {
+        color-scheme: dark !important;
+    }
+
+    .titleScreen {
+        background-color: #1b1d1d;
     }
