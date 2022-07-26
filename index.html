@@ -33,21 +33,32 @@
 
 <!--single-player screen code-->
 
-    <div class="singlePlayerScreen" style="display:none;">
-
-<p class="screenUsername"></p>
 
 
-    </div>
+<div class="singlePlayerScreen" style="display:none;">
+    <button class='titleScreenButton' style="display:none;">Title Screen</button>
+    <p class="screenUsername"></p>
+
+<body>
+        <div id="gameContainer">
+            <canvas id="gameBoard" width="500" height="500"></canvas>
+            <div id="scoreText">0 : 0</div>
+            <button id="resetBtn">Reset</button>
+        </div>
+        <script src="index.js"></script>
+    </body>
+    
+</div>
 
 <!--multi-player screen code-->
-
+    
     <div class="multiPlayerScreen" style="display:none;">
 
-<p class="screenUsername"></p>
+    <button class='titleScreenButton'>Title Screen</button>
+    <p class="screenUsername"></p>
 
     </div>
-</body>
+    </body>
 
 
 <!--Font info-->
