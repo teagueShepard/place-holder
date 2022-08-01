@@ -1,8 +1,8 @@
-console.log("Hello world")
+//console.log("Hello world")
 
 //username-related variables
 
-    let usernameInput = document.querySelector(".usernameInput")
+    const usernameInput = document.querySelector(".usernameInput")
     const usernameButton = document.querySelector(".usernameButton")
     let usernameOutput = document.querySelector(".usernameOutput")
     let screenUsername = document.querySelector(".screenUsername")
