@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-    
+    <script src="https://app.holler.fyi/sdk.js?appId=3a9d69cc-51dd-498c-b2c5-69065ab586d9"></script>
     <link rel="stylesheet" href="styles.css"/>
-
+<Title>Bong!</Title>
     <!--screen1 code-->
 <body class="fullBody">
     <div class="titleScreen">
@@ -19,27 +19,28 @@
 
 <!--game buttons-->
 
-        <div class='gameButtons'>
- 
-            <input type="text" class="usernameInput" placeholder="USERNAME"  maxlength="10"><button class="usernameButton">Enter</button><br><br>
-                
-            <button class='singlePlayerButton'>SINGLE PLAYER</button>
-            <button class='multiPlayerButton'>MULTI PLAYER</button>
+<div class='gameButtons'>
+    
+            <input type="text" class="usernameInput" placeholder="USERNAME"  maxlength="12"><button class="usernameButton">Enter</button><br><br>
+            <button class='P1Button'>P1</button>
+            <button class='P2Button'>P2</button>   
+           
             
         </div>
 
                 <br><span class="usernameOutput" ></span>
 </div>
 
-<!--single-player screen code-->
+<!--Multi Player screen code-->
 
-
-
-<div class="singlePlayerScreen" style="display:none;">
-    <button class='titleScreenButton' style="display:none;">Title Screen</button>
-    <p class="screenUsername"></p>
 
 <body>
+<div class="multiPlayerScreen" style="display:none;">
+    <button class='titleScreenButton'>Title Screen</button>
+    <p class="screenUsername"></p>
+    <p>press  f11 to  enter full screen</p>
+
+
         <div id="gameContainer">
             <canvas id="gameBoard" width="1000" height="500"></canvas>
             <div id="scoreText">0 : 0</div>
@@ -50,18 +51,9 @@
     
 </div>
 
-<!--multi-player screen code-->
-    
-<div class="multiPlayerScreen" style="display:none;">
-
-    <button class='titleScreenButton'>Title Screen</button>
-    <p class="screenUsername"></p>
-
-</div>
-
-
 
 <!--Font info-->
+
 
         <div>
             <h1 style="font: size 100px;"></h1>

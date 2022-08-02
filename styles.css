@@ -1,3 +1,7 @@
+html {        
+    background-size: cover;
+}
+
 input {font-family: 'ArcadeClassic', sans-serif;
 }
 button {font-family: 'ArcadeClassic', sans-serif;
@@ -25,7 +29,7 @@ p.screenUsername {
     justify-content: center;
  }
 
-/*typwriter experimental*/
+/*typwriter effect*/
 
     .typed-out {  
    padding-top: 0em;
@@ -47,15 +51,17 @@ p.screenUsername {
     to { width: 100% }
     }
 
-/*single player screen info*/
+/*title screen info*/
 
-    .singlePlayerButton {
+    .P1Button {
         display: none;
     }
-    .multiPlayerButton {
+    .P2Button {
         display: none;
     }
-   
+    /* .titleScreenButton {
+        display: none;
+    } */
     /* Darkmode styling */
 
     html, body {
@@ -81,8 +87,7 @@ p.screenUsername {
 
     /* single player screen formatting */
 
-    body.singlePlayerScreen {
-
+    body.multiPlayerScreen {
             text-align: center;
     }
 
@@ -94,7 +99,9 @@ body {
 
 #gameContainer{
     text-align: center;
+    background-color: #1b1d1d;
 }
+
 #gameBoard{
     border: 3px solid;
 }
