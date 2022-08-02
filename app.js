@@ -9,7 +9,7 @@ holler.onLoad(()=>{
     let screenUsername = document.querySelector(".screenUsername")
     const loadingOpponentMessage = document.querySelector(".loadingOpponentMessage")
     const opponentUsername = 0
-
+    let currentUsername =""
 
     
 
@@ -17,10 +17,9 @@ holler.onLoad(()=>{
 
         
 
-        usernameButton.onclick = function (){
-            let currentUsername =  usernameInput.value
+        usernameButton.onclick = function (){ 
+            currentUsername=  usernameInput.value
             if (currentUsername.length > 0) {
-
 
                 usernameOutput.textContent = "welcome:" + currentUsername
 
@@ -93,16 +92,20 @@ const showScreen = (screenToShow)=>{
 P1Button.onclick = ()=>showScreen(multiPlayerScreen)
 P2Button.onclick = ()=>showScreen(multiPlayerScreen)
 titleScreenButton.onclick = ()=>{showScreen(titleScreen)
-console.log (usernameInput + "pressed the title screen button")
-}
-lobbyButton.onclick = ()=>{showScreen(lobbyScreen)
-    P1Button.style["display"] = "block"
-    P2Button.style["display"] = "block"
+    console.log (currentUsername + " pressed the title screen button")
 }
 
-// if (screen === multiPlayerScreen) {
-//     loadBong()
-// }
+lobbyButton.onclick = ()=>{showScreen(lobbyScreen)
+    P1Button.style["display"] = "block"
+    P2Button.style["display"] = "block"}
+
+if (screen === multiPlayerScreen) {
+    loadBong()
+}
+
+if (screen === multiPlayerScreen != titleScreen, lobbyScreen) {
+    loadBong()
+}
 
     
 //Game Code
