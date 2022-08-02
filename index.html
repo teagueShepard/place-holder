@@ -3,7 +3,7 @@
     <script src="https://app.holler.fyi/sdk.js?appId=3a9d69cc-51dd-498c-b2c5-69065ab586d9"></script>
     <link rel="stylesheet" href="styles.css"/>
 <Title>Bong!</Title>
-    <!--screen1 code-->
+    <!--titleScreen code-->
 <body class="fullBody">
     <div class="titleScreen">
 
@@ -22,8 +22,8 @@
 <div class='gameButtons'>
     
             <input type="text" class="usernameInput" placeholder="USERNAME"  maxlength="12"><button class="usernameButton">Enter</button><br><br>
-            <button class='P1Button'>P1</button>
-            <button class='P2Button'>P2</button>   
+            <button class="lobbyButton" style="display:none;">Enter Lobby</button>
+            
            
             
         </div>
@@ -31,7 +31,19 @@
                 <br><span class="usernameOutput" ></span>
 </div>
 
-<!--Multi Player screen code-->
+<!-- lobbyScreen code-->
+<body>
+        <div class="lobbyScreen" style="display: none;">
+            <button class='titleScreenButton'>Title Screen</button>
+            <button class='P1Button'>P1</button>
+            <button class='P2Button'>P2</button>   
+            <p class="loadingOpponentMessage"></p>
+        </div>
+    
+</body>
+
+
+<!--multiPlayerScreen code-->
 
 
 <body>

@@ -1,3 +1,4 @@
+holler.onLoad(()=>{
 //console.log("Hello world")
 
 //username-related variables
@@ -6,11 +7,10 @@
     const usernameButton = document.querySelector(".usernameButton")
     let usernameOutput = document.querySelector(".usernameOutput")
     let screenUsername = document.querySelector(".screenUsername")
+    const loadingOpponentMessage = document.querySelector(".loadingOpponentMessage")
+    const opponentUsername = 0
 
-//Set current player
 
-// P1Button.onclick = function ()
-   
     
 
 //set username function     
@@ -25,8 +25,8 @@
                 usernameOutput.textContent = "welcome:" + currentUsername
 
                 setTimeout(() => {
-                P1Button.style["display"] = "block"
-                P2Button.style["display"] = "block"
+                
+                lobbyButton.style["display"] = "block"
                 }, 1000);
 
                 screenUsername.textContent = "P1:" + currentUsername
@@ -41,6 +41,7 @@
             //   stuff to do after time of 200ms has elapsed
             // }, 200)
 
+            
 //change username
        usernameInput.onkeydown = function(){
         usernameOutput.textContent = "" 
@@ -49,6 +50,13 @@
        };
 
   
+// send and recieve username info
+//                 console.log (currentUsername)
+//                 holler.appInstance.notifyClients(currentUsername)
+//                 holler.onClientEvent(event=>{
+//                     console.log(`Client event received: ${event}`)})
+
+//                 loadingOpponentMessage.textContent = currentUsername + "vs" + opponentUsername
 
     
 
@@ -57,20 +65,22 @@
     //screens
 const titleScreen = document.querySelector(".titleScreen")
 const multiPlayerScreen = document.querySelector(".multiPlayerScreen")
-
+const lobbyScreen = document.querySelector(".lobbyScreen")
 
     //screen changing buttons
 const P1Button = document.querySelector(".P1Button")
 const P2Button = document.querySelector(".P2Button")
 const titleScreenButton = document.querySelector(".titleScreenButton")
+const lobbyButton = document.querySelector(".lobbyButton")
 
     //screen changing logic
 
-const allScreens = [titleScreen, multiPlayerScreen]
+const allScreens = [titleScreen, lobbyScreen, multiPlayerScreen]
 
 const showScreen = (screenToShow)=>{
     allScreens.forEach(screen=>{
         if(screen === screenToShow){
+            console.log ("screen is switched")
             screen.style["display"] = "block"
         }else{
             screen.style["display"] = "none"
@@ -78,15 +88,21 @@ const showScreen = (screenToShow)=>{
     })
 }
 
+            //screen changing button events
 
 P1Button.onclick = ()=>showScreen(multiPlayerScreen)
 P2Button.onclick = ()=>showScreen(multiPlayerScreen)
-titleScreenButton.onclick = ()=>showScreen(titleScreen)
-
-if (screen === multiPlayerScreen || titleScreen) {
-    console.log("screen is switched")
-    loadBong()
+titleScreenButton.onclick = ()=>{showScreen(titleScreen)
+console.log (usernameInput + "pressed the title screen button")
 }
+lobbyButton.onclick = ()=>{showScreen(lobbyScreen)
+    P1Button.style["display"] = "block"
+    P2Button.style["display"] = "block"
+}
+
+// if (screen === multiPlayerScreen) {
+//     loadBong()
+// }
 
     
 //Game Code
@@ -287,3 +303,4 @@ function loadBong(){
             gameStart();
         };
     }
+})
