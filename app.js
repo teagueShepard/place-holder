@@ -211,6 +211,9 @@ function loadBong(){
                 createBall();
                 return;
             }
+            if(player1Score >= 5 || player2Score >= 5){
+                resetGame()
+            }
             if(ballX <= (paddle1.x + paddle1.width + ballRadius)){
                 if(ballY > paddle1.y && ballY < paddle1.y + paddle1.height){
                     ballX = (paddle1.x + paddle1.width) + ballRadius; // if ball gets stuck
