@@ -12,10 +12,6 @@ let usernameInfo = {hollerName: myHollerUsername, screenName: currentScreenUsern
         console.log ("my holler username is: " + user.name)
 })
 
-setTimeout (notifyUsernameInfo, 1000)
-function notifyUsernameInfo(){
-    holler.appInstance.notifyClients(JSON.stringify (usernameInfo))
-}
 let allUsernames = []
 
 holler.onClientEvent((event)=>{
@@ -26,6 +22,7 @@ holler.onClientEvent((event)=>{
     console.log ("raw: "+event)
     console.log (allUsernames)
 })
+
 
 // 
 // function checkForMatchingCredentials (credentials){
@@ -80,10 +77,16 @@ holler.onClientEvent((event)=>{
     let usernameOutput = document.querySelector(".usernameOutput")
     let screenUsername = document.querySelector(".screenUsername")
     
-
-//set username function     
-
+//screen changing buttons
+    const P1Button = document.querySelector(".P1Button")
+    const P2Button = document.querySelector(".P2Button")
+    const lobbyButton = document.querySelector(".lobbyButton")
+    const titleScreenButton = document.querySelector(".titleScreenButton")
+//set username    
+let usernameButtonIsClicked = false
         usernameButton.onclick = function (){ 
+            usernameButtonIsClicked = true  
+            if (usernameButtonIsClicked === true){updateUserList ()} 
             currentScreenUsername=  usernameInput.value
             usernameInfo = {hollerName: myHollerUsername, screenName: currentScreenUsername}
 
@@ -91,13 +94,11 @@ holler.onClientEvent((event)=>{
            
             if (currentScreenUsername.length > 0) {
                 currentScreenUsername=  usernameInput.value
-                usernameOutput.textContent = "welcome:" + currentScreenUsername
+                usernameOutput.textContent = "username:" + currentScreenUsername
                 usernameButton.style["display"] = "none"
                 usernameInput.style["display"] = "none"
-                setTimeout(() => {
-                
                 lobbyButton.style["display"] = "block"
-                }, 100);
+        
 
                 screenUsername.textContent = "P1:" + currentScreenUsername
 
@@ -106,6 +107,14 @@ holler.onClientEvent((event)=>{
                 P2Button.style["display"] = "none"
             }
         }
+//update user list
+
+function updateUserList (){
+    console.log ("updating player list")
+    userList.textContent = "player list: " + allUsernames.map((allUsernames)=>{return allUsernames.screenName})
+    setTimeout (updateUserList, 100)
+}
+  
 
             //setTimeout syntax  ---->  setTimeout(function() {
             //   stuff to do after time of 200ms has elapsed
@@ -113,12 +122,10 @@ holler.onClientEvent((event)=>{
 
             
 //change screen username
-       usernameInput.onkeydown = function(){
-        usernameOutput.textContent = "" 
-        P1Button.style["display"] = "none"
-        P2Button.style["display"] = "none"
-        lobbyButton.style["display"] = "none"
-       };
+    //    usernameInput.onkeydown = function(){
+    //     usernameOutput.textContent = "" 
+    //     lobbyButton.style["display"] = "none"
+    //    };
     
 const userList = document.querySelector(".user-list")
 
@@ -130,11 +137,7 @@ const titleScreen = document.querySelector(".titleScreen")
 const multiPlayerScreen = document.querySelector(".multiPlayerScreen")
 const lobbyScreen = document.querySelector(".lobbyScreen")
 
-    //screen changing buttons
-const P1Button = document.querySelector(".P1Button")
-const P2Button = document.querySelector(".P2Button")
-const lobbyButton = document.querySelector(".lobbyButton")
-const titleScreenButton = document.querySelector(".titleScreenButton")
+    
     //screen changing logic
 
 const allScreens = [titleScreen, lobbyScreen, multiPlayerScreen]
@@ -160,7 +163,7 @@ lobbyButton.onclick = ()=>{ console.log (currentScreenUsername + " pressed the l
     P1Button.style["display"] = "block"
     P2Button.style["display"] = "block"
    console.log (allUsernames)
-    userList.textContent = "player list: " + allUsernames.map((allUsernames)=>{return allUsernames.screenName})
+   
 }
 titleScreenButton.onclick = ()=>{ console.log (currentScreenUsername + " pressed the title screen button")
 showScreen(titleScreen) 
