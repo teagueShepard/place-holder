@@ -92,7 +92,8 @@ holler.onClientEvent((event)=>{
             if (currentScreenUsername.length > 0) {
                 currentScreenUsername=  usernameInput.value
                 usernameOutput.textContent = "welcome:" + currentScreenUsername
-
+                usernameButton.style["display"] = "none"
+                usernameInput.style["display"] = "none"
                 setTimeout(() => {
                 
                 lobbyButton.style["display"] = "block"
