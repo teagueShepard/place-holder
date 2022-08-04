@@ -12,7 +12,10 @@ let usernameInfo = {hollerName: myHollerUsername, screenName: currentScreenUsern
         console.log ("my holler username is: " + user.name)
 })
 
-setTimeout (holler.appInstance.notifyClients(JSON.stringify (usernameInfo)), 100)
+setTimeout (notifyUsernameInfo, 1000)
+function notifyUsernameInfo(){
+    holler.appInstance.notifyClients(JSON.stringify (usernameInfo))
+}
 let allUsernames = []
 
 holler.onClientEvent((event)=>{
