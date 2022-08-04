@@ -1,34 +1,100 @@
 holler.onLoad(()=>{
 //console.log("Hello world")
 
+
+// holler/user info
+let myHollerUsername = ""
+let currentScreenUsername = ""
+let usernameInfo = {hollerName: myHollerUsername, screenName: currentScreenUsername}
+
+    holler.me((user)=>{
+        myHollerUsername=user.name
+        console.log ("my holler username is: " + user.name)
+})
+   
+let allUsernames = []
+
+holler.onClientEvent((event)=>{
+   
+    const parsed = JSON.parse(event)
+    allUsernames.push(parsed)
+    console.log ("parsed: "+ parsed)
+    console.log ("raw: "+event)
+    console.log (allUsernames)
+})
+
+// 
+// function checkForMatchingCredentials (credentials){
+// credentials == usernameInfo
+// return credentials.hollerUsername
+// }
+// if {allUsernames.find(checkForMatchingCredentials) = false}{
+//     allUsernames.push(parsed)
+// }
+
+// let stuff = [1, 3, 4]
+// undefined
+// stuff.filter(n=>n > 2)
+// (2) [3, 4]0: 31: 4length: 2[[Prototype]]: Array(0)
+// function isGreaterThan2(n){
+//     return n > 2
+// }
+// undefined
+// stuff.filter(isGreaterThan2)
+// (2) [3, 4]
+// function isGreaterThan2(rabbit){
+//     return rabbit > 2
+// }
+// undefined
+// stuff.filter(isGreaterThan2)
+// (2) [3, 4]
+// let books = [{title:"p&P", length:44}, {title:"W&P", length:40000}]
+// undefined
+// books.map((book)=>{return book.length})
+// (2) [44, 40000]
+// books.map((book)=>{return book.title})
+// (2) ['p&P', 'W&P']
+// books.map((book)=>{return book.title + " is " + book.length + " pages long"})
+// (2) ['p&P is 44 pages long', 'W&P is 40000 pages long']
+// function describeBook(book){
+//     return  book.title + " is " + book.length + " pages long"
+// }
+// undefined
+// books.map(describeBook)
+// (2) ['p&P is 44 pages long', 'W&P is 40000 pages long']
+// let bookDescriptions = books.map(describeBook)
+// undefined
+// bookDescriptions
+// (2) ['p&P is 44 pages long', 'W&P is 40000 pages long']
+// bookDescriptions.join(", and ")
+// 'p&P is 44 pages long, and W&P is 40000 pages long'
+
 //username-related variables
 
     const usernameInput = document.querySelector(".usernameInput")
     const usernameButton = document.querySelector(".usernameButton")
     let usernameOutput = document.querySelector(".usernameOutput")
     let screenUsername = document.querySelector(".screenUsername")
-    const loadingOpponentMessage = document.querySelector(".loadingOpponentMessage")
-    const opponentUsername = 0
-    let currentUsername =""
-
     
 
 //set username function     
 
-        
-
         usernameButton.onclick = function (){ 
-            currentUsername=  usernameInput.value
-            if (currentUsername.length > 0) {
+            currentScreenUsername=  usernameInput.value
+            usernameInfo = {hollerName: myHollerUsername, screenName: currentScreenUsername}
 
-                usernameOutput.textContent = "welcome:" + currentUsername
+            holler.appInstance.notifyClients(JSON.stringify (usernameInfo))
+           
+            if (currentScreenUsername.length > 0) {
+                currentScreenUsername=  usernameInput.value
+                usernameOutput.textContent = "welcome:" + currentScreenUsername
 
                 setTimeout(() => {
                 
                 lobbyButton.style["display"] = "block"
-                }, 1000);
+                }, 100);
 
-                screenUsername.textContent = "P1:" + currentUsername
+                screenUsername.textContent = "P1:" + currentScreenUsername
 
             } else {
                 P1Button.style["display"] = "none"
@@ -41,23 +107,16 @@ holler.onLoad(()=>{
             // }, 200)
 
             
-//change username
+//change screen username
        usernameInput.onkeydown = function(){
         usernameOutput.textContent = "" 
         P1Button.style["display"] = "none"
         P2Button.style["display"] = "none"
+        lobbyButton.style["display"] = "none"
        };
-
-  
-// send and recieve username info
-//                 console.log (currentUsername)
-//                 holler.appInstance.notifyClients(currentUsername)
-//                 holler.onClientEvent(event=>{
-//                     console.log(`Client event received: ${event}`)})
-
-//                 loadingOpponentMessage.textContent = currentUsername + "vs" + opponentUsername
-
     
+const userList = document.querySelector(".user-list")
+
 
 //screen changer
  
@@ -69,9 +128,8 @@ const lobbyScreen = document.querySelector(".lobbyScreen")
     //screen changing buttons
 const P1Button = document.querySelector(".P1Button")
 const P2Button = document.querySelector(".P2Button")
-const titleScreenButton = document.querySelector(".titleScreenButton")
 const lobbyButton = document.querySelector(".lobbyButton")
-
+const titleScreenButton = document.querySelector(".titleScreenButton")
     //screen changing logic
 
 const allScreens = [titleScreen, lobbyScreen, multiPlayerScreen]
@@ -79,6 +137,7 @@ const allScreens = [titleScreen, lobbyScreen, multiPlayerScreen]
 const showScreen = (screenToShow)=>{
     allScreens.forEach(screen=>{
         if(screen === screenToShow){
+            let currentScreen = screen
             console.log ("screen is switched")
             screen.style["display"] = "block"
         }else{
@@ -91,16 +150,15 @@ const showScreen = (screenToShow)=>{
 
 P1Button.onclick = ()=>showScreen(multiPlayerScreen)
 P2Button.onclick = ()=>showScreen(multiPlayerScreen)
-titleScreenButton.onclick = ()=>{showScreen(titleScreen)
-    console.log (currentUsername + " pressed the title screen button")
-}
-
-lobbyButton.onclick = ()=>{showScreen(lobbyScreen)
+lobbyButton.onclick = ()=>{ console.log (currentScreenUsername + " pressed the lobby screen button")
+    showScreen(lobbyScreen)
     P1Button.style["display"] = "block"
-    P2Button.style["display"] = "block"}
-
-if (screen === multiPlayerScreen) {
-    loadBong()
+    P2Button.style["display"] = "block"
+   console.log (allUsernames)
+    userList.textContent = "player list: " + allUsernames.map((allUsernames)=>{return allUsernames.screenName})
+}
+titleScreenButton.onclick = ()=>{ console.log (currentScreenUsername + " pressed the title screen button")
+showScreen(titleScreen) 
 }
 
 if (screen === multiPlayerScreen != titleScreen, lobbyScreen) {
@@ -114,6 +172,7 @@ function loadBong(){
         const gameBoard = document.querySelector("#gameBoard");
         const ctx = gameBoard.getContext("2d");
         const scoreText = document.querySelector("#scoreText");
+        const startButton = document.querySelector("#startButton");
         const resetBtn = document.querySelector("#resetBtn");
         const gameWidth = gameBoard.width;
         const gameHeight = gameBoard.height;
@@ -147,10 +206,11 @@ function loadBong(){
         };
         
         window.addEventListener("keydown", changeDirection);
-        resetBtn.addEventListener("click", resetGame);
+        startButton.onclick = ()=>{resetGame()} 
+        resetBtn.onclick = ()=>{resetGame()} 
         
-        gameStart();
         
+
         function gameStart(){
             createBall();
             nextTick();
@@ -181,7 +241,7 @@ function loadBong(){
             ctx.strokeRect(paddle2.x, paddle2.y, paddle2.width, paddle2.height);
         };
         function createBall(){
-            ballSpeed = 1;
+            ballSpeed = 2;
             if(Math.round(Math.random()) == 1){
                 ballXDirection =  1; 
             }
@@ -230,9 +290,10 @@ function loadBong(){
                 createBall();
                 return;
             }
-            if(player1Score >= 5 || player2Score >= 5){
-                resetGame()
+            if(player1Score >= 3 || player2Score >= 3){
+                resetGame() //reset game if score exceeds 5
             }
+
             if(ballX <= (paddle1.x + paddle1.width + ballRadius)){
                 if(ballY > paddle1.y && ballY < paddle1.y + paddle1.height){
                     ballX = (paddle1.x + paddle1.width) + ballRadius; // if ball gets stuck

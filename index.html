@@ -34,10 +34,17 @@
 <!-- lobbyScreen code-->
 <body>
         <div class="lobbyScreen" style="display: none;">
-            <button class='titleScreenButton'>Title Screen</button>
-            <button class='P1Button'>P1</button>
-            <button class='P2Button'>P2</button>   
-            <p class="loadingOpponentMessage"></p>
+                <button class='titleScreenButton'>Title Screen</button>
+            <body class="body-one">
+                <h1></h1>
+                <div class="container">
+                <div class="typed-out">LOBBY</div>
+                </div>
+            </body>
+                <span class="user-list">USERS:</span>
+                <button class='P1Button'>P1</button>
+                <button class='P2Button'>P2</button>   
+                <p class="loadingOpponentMessage"></p>
         </div>
     
 </body>
@@ -48,14 +55,12 @@
 
 <body>
 <div class="multiPlayerScreen" style="display:none;">
-    <button class='titleScreenButton'>Title Screen</button>
     <p class="screenUsername"></p>
-    <p>press  f11 to  enter full screen</p>
-
-
         <div id="gameContainer">
+            
             <canvas id="gameBoard" width="1000" height="500"></canvas>
             <div id="scoreText">0 : 0</div>
+           <button id="startButton" style="font-family: 'ArcadeClassic', sans-serif;font-size: 22px;width: 100px;height: 50px;border: 4px solid;border-radius: 15px;cursor: pointer;" >Start</button> 
             <button id="resetBtn">Reset</button>
         </div>
 
