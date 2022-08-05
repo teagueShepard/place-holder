@@ -66,7 +66,7 @@ holler.onLoad(()=>{
                     console.log ("user name length: " + usernameInput.value.length) 
                     usernameInfo = {type: "username-info", hollerName: myHollerUsername, screenName: currentScreenUsername}
                     console.log ("username info: " + JSON.stringify (usernameInfo))
-                    holler.appInstance.notifyClients(JSON.stringify(usernameInfo))
+                    updateUsername()
                     // addUserToUserList (usernameInfo)
                 } 
                         
@@ -89,15 +89,23 @@ holler.onLoad(()=>{
                
                 if (parsedDataFromOtherClient.type == "username-info") {
                     console.log ("parsed: ", parsedDataFromOtherClient)
-                   if (parsedDataFromOtherClient.hollerName != userList.hollerName && parsedDataFromOtherClient.screenName != userList.screenName){
-                    userList.push(parsedDataFromOtherClient)  
-                    console.log ("user list: ", userList)  
-                    respondToUserListUpdate()
-                } 
+                   if (undefined === listContainsUser(userList, parsedDataFromOtherClient)){
+                        userList.push(parsedDataFromOtherClient)  
+                        console.log ("user list: ", userList)  
+                        respondToUserListUpdate()
+                    } 
                 }
                 
             })
 
+            function listContainsUser(list, user) {
+                return list.find((user)=>{return user.hollerName === user.hollerName && user.screenName ===user.screenName})
+            }
+            function updateUsername (){
+                holler.appInstance.notifyClients(JSON.stringify(usernameInfo))
+                setTimeout (updateUsername, 1000)
+            }
+            
             function respondToUserListUpdate(){
                 let lobbyUserList = document.querySelector (".lobby-user-list")
                 lobbyUserList.textContent = "player list: " + userList.map((userList)=>{return userList.screenName})
