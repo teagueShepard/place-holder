@@ -87,19 +87,23 @@ holler.onLoad(()=>{
 
                 const parsedDataFromOtherClient = JSON.parse(stringFromOtherClient)
                
+                console.log("list contains: " + listContainsUser(userList, parsedDataFromOtherClient))
                 if (parsedDataFromOtherClient.type == "username-info") {
                     console.log ("parsed: ", parsedDataFromOtherClient)
-                   if (undefined === listContainsUser(userList, parsedDataFromOtherClient)){
+
+                    if (!listContainsUser(userList, parsedDataFromOtherClient)){
                         userList.push(parsedDataFromOtherClient)  
-                        console.log ("user list: ", userList)  
+                        console.log ("user list: ", userList)
                         respondToUserListUpdate()
                     } 
                 }
                 
             })
 
-            function listContainsUser(list, user) {
-                return list.find((user)=>{return user.hollerName === user.hollerName && user.screenName ===user.screenName})
+            function listContainsUser(list, userIn) {
+                return undefined != list.find((user)=>{
+                    return user.hollerName === userIn.hollerName && user.screenName === userIn.screenName
+                })
             }
             function updateUsername (){
                 holler.appInstance.notifyClients(JSON.stringify(usernameInfo))
