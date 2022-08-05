@@ -46,12 +46,11 @@ holler.onLoad(()=>{
                 })
             }
         showScreen(titleScreen)
-          
         // setting username
 
             let currentScreenUsername = ""
-            let usernameInfo = {id: "usernameInfo", hollerName: myHollerUsername, screenName: currentScreenUsername}
-            let allUsernames = []  
+            let usernameInfo = {type: "username-info", hollerName: myHollerUsername, screenName: currentScreenUsername}
+            let userList = []  
         //username-related variables
 
             const usernameInput = document.querySelector(".usernameInput")
@@ -65,9 +64,10 @@ holler.onLoad(()=>{
                     currentScreenUsername=  usernameInput.value
                     console.log ("my current username is: " + currentScreenUsername)
                     console.log ("user name length: " + usernameInput.value.length) 
-                    usernameInfo = {hollerName: myHollerUsername, screenName: currentScreenUsername}
+                    usernameInfo = {type: "username-info", hollerName: myHollerUsername, screenName: currentScreenUsername}
                     console.log ("username info: " + JSON.stringify (usernameInfo))
-                    addUserToUserList (usernameInfo)
+                    holler.appInstance.notifyClients(JSON.stringify(usernameInfo))
+                    // addUserToUserList (usernameInfo)
                 } 
                         
                 if (currentScreenUsername.length > 0) {
@@ -78,61 +78,37 @@ holler.onLoad(()=>{
                     screenUsername.textContent = "P1:" + currentScreenUsername
                 }
             }
+            
+
         // holler/user info
-            
-        
+            holler.onClientEvent((stringFromOtherClient)=>{
+                
+                console.log ("raw: "+stringFromOtherClient)
 
-            // holler.onClientEvent((stringFromOtherClient)=>{
-            
-            //     console.log ("raw: "+stringFromOtherClient)
-
-            //     const parsedDataFromOtherClient = JSON.parse(stringFromOtherClient)
-
-            // //If parsedDataFromClient === usernameInfo then allUsernames.push(parsedDataFromOtherClient) else if parsedDataFromClient is a pairing then call prepareMatch
-            //     if(parsedDataFromOtherClient.type === "user-list-update"){
-                    
-            //         // allUsernames = parsedDataFromOtherClient.userList
-            //         allUsernames.push(parsedDataFromOtherClient.userList)
-            //         console.log ("parsed: ", parsedDataFromOtherClient)
-            //         console.log ("allUsernames", allUsernames)  
-            //         // console.log ("the matched pair is: ", parsedDataFromOtherClient)
-            //         respondToUserListUpdate()
-            //     }
-            // })
+                const parsedDataFromOtherClient = JSON.parse(stringFromOtherClient)
+               
+                if (parsedDataFromOtherClient.type == "username-info") {
+                    console.log ("parsed: ", parsedDataFromOtherClient)
+                   if (parsedDataFromOtherClient.hollerName != userList.hollerName && parsedDataFromOtherClient.screenName != userList.screenName){
+                    userList.push(parsedDataFromOtherClient)  
+                    console.log ("user list: ", userList)  
+                    respondToUserListUpdate()
+                } 
+                }
+                
+            })
 
             function respondToUserListUpdate(){
-
-                userList.textContent = "player list: " + allUsernames.map((allUsernames)=>{return allUsernames.screenName})
+                let lobbyUserList = document.querySelector (".lobby-user-list")
+                lobbyUserList.textContent = "player list: " + userList.map((userList)=>{return userList.screenName})
 
                 //TODO:  make pairings & start matches, etc
             }
-
-            //update user list
-            // let matchedPair = []
-            function addUserToUserList (newUser){
-                allUsernames.push(newUser)
-                respondToUserListUpdate()
-                console.log ("updated player list", allUsernames)
-                // if (allUsernames.length > 1){
-                //     matchedPair.push(allUsernames[0],allUsernames[1])
-                //     allUsernames.splice(0,2) 
-                //     console.log("about to send" + matchedPair)
-                //     holler.appInstance.notifyClients(JSON.stringify(matchedPair))
-                // }
-                let userListUpdate = {
-                    type:"user-list-update",
-                    userList:allUsernames
-                }
-                // holler.appInstance.notifyClients(JSON.stringify(userListUpdate))
-            }
-                
-            const userList = document.querySelector(".user-list")
-          
-         
         
-            if (screen === multiPlayerScreen != titleScreen, lobbyScreen) {
-                loadBong()
-            }
+            // if (screen === multiPlayerScreen != titleScreen, lobbyScreen) {
+            //     loadBong()
+            // }
     }
     
 })
+
