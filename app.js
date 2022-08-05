@@ -10,7 +10,8 @@ let usernameInfo = {hollerName: myHollerUsername, screenName: currentScreenUsern
     holler.me((user)=>{
         myHollerUsername=user.name
         console.log ("my holler username is: " + user.name)
-        
+       setTimeout (showScreen(titleScreen), 100) 
+
 })
 
 let allUsernames = []
@@ -108,6 +109,7 @@ usernameButton.onclick = function (){
 //screen changer
  
     //screens
+const loadingScreen = document.querySelector(".loadingScreen")
 const titleScreen = document.querySelector(".titleScreen")
 const multiPlayerScreen = document.querySelector(".multiPlayerScreen")
 const lobbyScreen = document.querySelector(".lobbyScreen")
@@ -115,7 +117,7 @@ const lobbyScreen = document.querySelector(".lobbyScreen")
     
     //screen changing logic
 
-const allScreens = [titleScreen, lobbyScreen, multiPlayerScreen]
+const allScreens = [loadingScreen, titleScreen, lobbyScreen, multiPlayerScreen]
 
 const showScreen = (screenToShow)=>{
     allScreens.forEach(screen=>{
