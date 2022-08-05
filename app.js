@@ -79,8 +79,12 @@ holler.onLoad(()=>{
                 }
             }
             
+            function gameOn(gameProposal){
+                currentGame = gameProposal
+                console.log("Ready to start game: ", currentGame)
+            }
 
-        // holler/user info
+            console.log ("starting to listen for events")
             holler.onClientEvent((stringFromOtherClient)=>{
                 
                 console.log ("raw: "+stringFromOtherClient)
@@ -93,9 +97,28 @@ holler.onLoad(()=>{
 
                     if (!listContainsUser(userList, parsedDataFromOtherClient)){
                         userList.push(parsedDataFromOtherClient)  
+
                         console.log ("user list: ", userList)
                         respondToUserListUpdate()
                     } 
+                }else if(parsedDataFromOtherClient.type == "propose-game"){
+                    console.log("considering game from someone else, I'm", myHollerUsername, parsedDataFromOtherClient)
+                    if(!currentGame && parsedDataFromOtherClient.initiator !== myHollerUsername){
+                        console.log("Accepting game from someone else")
+                        gameOn(parsedDataFromOtherClient)
+
+                        let accepMessage = {
+                            type:"accept-game",
+                            initiator:currentGame.initiator,
+                            receiver:currentGame.receiver
+                        }
+                        holler.appInstance.notifyClients(JSON.stringify(accepMessage))
+                    }
+                }else if(parsedDataFromOtherClient.type == "accept-game"){
+
+                    if(!currentGame && parsedDataFromOtherClient.initiator == myHollerUsername){
+                        gameOn(parsedDataFromOtherClient)
+                    }
                 }
                 
             })
@@ -115,6 +138,26 @@ holler.onLoad(()=>{
                 lobbyUserList.textContent = "player list: " + userList.map((userList)=>{return userList.screenName})
 
                 //TODO:  make pairings & start matches, etc
+                
+                if(userList.length>1){
+                    
+                    sortyByProperty("hollerName", userList)
+
+                    if(userList[0].hollerName === myHollerUsername){
+                        
+                        let receiver = userList[1]
+                        
+                        let startGameMessage = {
+                            type:"propose-game",
+                            initiator:myHollerUsername,
+                            receiver:receiver.hollerName
+                        }
+                        holler.appInstance.notifyClients(JSON.stringify(startGameMessage))
+                    // }else{
+                    //     receiver = userList[0]
+                    }
+
+                }
             }
         
             // if (screen === multiPlayerScreen != titleScreen, lobbyScreen) {
@@ -123,4 +166,18 @@ holler.onLoad(()=>{
     }
     
 })
+
+function sortyByProperty (prop, arr) {
+    arr.sort(function (a, b) {
+        if (a[prop] < b[prop]) {
+            return -1;
+        } else if (a[prop] > b[prop]) {
+            return 1;
+        } else {
+            return 0;
+        }
+    });
+};
+
+let currentGame;
 
